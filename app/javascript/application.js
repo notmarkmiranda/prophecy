@@ -2,3 +2,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "mobile_message"
+// app/javascript/packs/application.js
+import Rails from "@rails/ujs"
+Rails.start()

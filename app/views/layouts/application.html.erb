@@ -21,6 +21,8 @@
   </head>
 
   <body class="min-h-screen bg-gray-50">
+    <%= render 'layouts/navbar' %>
+
     <div id="mobile-message" class="hidden fixed inset-0 bg-white flex items-center justify-center z-50">
       <div class="text-center px-4 py-8 sm:px-10 bg-white sm:rounded-xl">
         <h2 class="text-2xl font-bold text-gray-900">Please use a computer or our app</h2>
@@ -63,5 +65,18 @@
     <% end %>
 
     <%= yield %>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const flashMessages = document.querySelectorAll('.fixed.inset-x-0.top-0.z-50');
+        flashMessages.forEach(message => {
+          setTimeout(() => {
+            message.style.transition = "opacity 0.5s ease-out";
+            message.style.opacity = "0";
+            setTimeout(() => message.remove(), 500);
+          }, 5000); // 5000ms = 5 seconds
+        });
+      });
+    </script>
   </body>
 </html>
