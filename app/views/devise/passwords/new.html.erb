@@ -1,0 +1,51 @@
+<div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="text-center">
+      <svg class="mx-auto h-12 w-12 text-primary-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75a4.5 4.5 0 01-4.884 4.484c-1.076-.091-2.264.071-2.95.904l-7.152 8.684a2.548 2.548 0 11-3.586-3.586l8.684-7.152c.833-.686.995-1.874.904-2.95a4.5 4.5 0 016.336-4.486l-3.276 3.276a3.004 3.004 0 002.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.867 19.125h.008v.008h-.008v-.008z" />
+      </svg>
+    </div>
+    <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+      Reset your password
+    </h2>
+    <p class="mt-2 text-center text-sm text-gray-600">
+      Enter your email and we'll send you instructions
+    </p>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white px-4 py-8 shadow sm:rounded-xl sm:px-10">
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "space-y-6" }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div>
+          <%= f.label :email, class: "block text-sm font-medium leading-6 text-gray-900" %>
+          <div class="mt-2">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "you@example.com", class: "block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6" %>
+          </div>
+        </div>
+
+        <div>
+          <%= f.submit "Send reset instructions", class: "flex w-full justify-center rounded-lg bg-primary-500 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 transition-colors duration-200" %>
+        </div>
+      <% end %>
+
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="bg-white px-2 text-gray-500">Or go back to</span>
+          </div>
+        </div>
+
+        <div class="mt-6 flex items-center justify-center space-x-6 text-sm">
+          <%= link_to "Sign in", new_session_path(resource_name), class: "font-semibold leading-6 text-primary-600 hover:text-primary-500" %>
+          <%= link_to "Sign up", new_registration_path(resource_name), class: "font-semibold leading-6 text-primary-600 hover:text-primary-500" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

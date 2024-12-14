@@ -16,6 +16,7 @@ gem "solid_cable"
 gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
+gem "devise"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
