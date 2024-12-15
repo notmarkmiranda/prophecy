@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_14_025649) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_15_035700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "pools", force: :cascade do |t|
+    t.string "name", null: false
+    t.decimal "price", precision: 10, scale: 2
+    t.boolean "allow_multiple_entries", default: false
+    t.datetime "locked_at"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
