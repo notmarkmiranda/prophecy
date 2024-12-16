@@ -4,4 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :trackable, :lockable
+
+  has_many :created_pools, class_name: "Pool", foreign_key: "user_id", dependent: :destroy
 end
