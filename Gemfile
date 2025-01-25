@@ -23,6 +23,7 @@ group :development, :test do
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
   gem "rspec-rails", "~> 6.0"
+  gem "pry"
 end
 
 group :development do
@@ -33,4 +34,5 @@ group :test do
   gem "capybara", "~> 3.36"
   gem "selenium-webdriver" # Optional, for using Selenium with Capybara
   gem "webdrivers" # Optional, for automatically managing WebDriver binaries
+  gem "launchy"
 end

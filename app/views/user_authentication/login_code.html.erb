@@ -1,0 +1,5 @@
+<%= form_for :login_code, url: verify_login_code_path, method: :post do |f| %>
+  <%= f.label :login_code, "Login code" %>
+  <%= f.text_field :login_code %>
+  <%= f.submit "Verify" %>
+<% end %>

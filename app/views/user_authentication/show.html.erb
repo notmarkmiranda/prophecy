@@ -1,0 +1,6 @@
+<%= form_with model: User.new,url: user_authentication_path, method: :post do |f| %>
+  <%= f.label :email, "Email" %>
+  <%= f.text_field :email %>
+  <%= f.submit "Submit" %>
+<% end %>
+
