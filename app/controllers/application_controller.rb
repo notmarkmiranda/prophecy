@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
       redirect_to user_authentication_path, alert: "You must be logged in to access this section"
     end
   end
+
+  def redirect_if_logged_in
+    redirect_to dashboard_path if logged_in?
+  end
 end

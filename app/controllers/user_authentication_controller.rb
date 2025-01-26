@@ -1,4 +1,6 @@
 class UserAuthenticationController < ApplicationController
+  before_action :redirect_if_logged_in, only: [ :show, :create, :login_code ]
+
   def create
     user = User.find_or_create_by(user_params)
     user.set_login_code
