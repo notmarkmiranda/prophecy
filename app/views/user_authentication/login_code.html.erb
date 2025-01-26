@@ -1,5 +1,11 @@
-<%= form_for :login_code, url: verify_login_code_path, method: :post do |f| %>
-  <%= f.label :login_code, "Login code" %>
-  <%= f.text_field :login_code %>
-  <%= f.submit "Verify" %>
-<% end %>
+<div class="w-1/2 mx-auto mt-10 p-8 bg-white border border-gray-600 rounded-lg">
+  <%= form_for :login_code, url: verify_login_code_path, method: :post do |f| %>
+    <div class="mb-6">
+      <%= f.label :login_code, "Login code", class: "block text-gray-800 text-sm mb-2 uppercase tracking-wide" %>
+      <%= f.text_field :login_code, class: "shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+    <div class="flex items-center justify-between">
+      <%= f.submit "Verify", class: "border border-blue-600 text-blue-600 font-semibold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-blue-100 w-full transition duration-300 ease-in-out" %>
+    </div>
+  <% end %>
+</div>
