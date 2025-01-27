@@ -1,0 +1,14 @@
+<nav class="bg-gray-800 p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <div class="text-white text-lg font-bold">
+      <a href="<%= root_path %>">Prophecy</a>
+    </div>
+    <div>
+      <% if logged_in? %>
+        <%= button_to "Logout", logout_path, method: :delete, class: "text-white hover:text-gray-400 bg-transparent border-none cursor-pointer" %>
+      <% else %>
+        <%= link_to "Sign In", user_authentication_path, class: "text-white hover:text-gray-400" %>
+      <% end %>
+    </div>
+  </div>
+</nav>

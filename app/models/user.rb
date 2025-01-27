@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  validates :email, presence: true, uniqueness: true
+
   def authenticate_login_code(login_code)
     login_code == self.login_code && login_code_expires_at > Time.now
   end
