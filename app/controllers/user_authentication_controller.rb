@@ -5,6 +5,7 @@ class UserAuthenticationController < ApplicationController
     user = User.find_or_initialize_by(user_params)
     if user.valid?
       user.set_login_code
+      UserMailer.login_code_email(user).deliver_now
       session[:signed_id] = user.signed_id(expires_in: 15.minutes)
       redirect_to user_login_code_path
     else
