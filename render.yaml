@@ -23,7 +23,7 @@ services:
         value: 2
 
   - type: worker
-    name: good_job_worker
+    name: prophecy_worker
     runtime: ruby
     plan: starter
     buildCommand: "./bin/render-build.sh"
