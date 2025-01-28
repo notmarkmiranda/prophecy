@@ -38,15 +38,10 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Mailgun configuration
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: "smtp.mailgun.org",
-    port: 587,
-    domain: Rails.application.credentials.dig(:mailgun, :domain),
-    user_name: "postmaster@#{Rails.application.credentials.dig(:mailgun, :domain)}",
-    password: Rails.application.credentials.dig(:mailgun, :api_key),
-    authentication: "plain",
-    enable_starttls_auto: true
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: Rails.application.credentials.dig(:mailgun, :api_key),
+    domain: Rails.application.credentials.dig(:mailgun, :domain)
   }
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 

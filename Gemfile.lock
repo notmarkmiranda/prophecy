@@ -431,7 +431,7 @@ DEPENDENCIES
   jbuilder
   kamal
   launchy
-  mailgun-ruby (~> 1.2.0)
+  mailgun-ruby
   pg (~> 1.1)
   propshaft
   pry

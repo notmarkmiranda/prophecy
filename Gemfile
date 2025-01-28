@@ -17,7 +17,7 @@ gem "solid_cable"
 gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
-gem "mailgun-ruby", "~>1.2.0"
+gem "mailgun-ruby"
 gem "good_job", "~> 3.0"
 
 group :development, :test do
