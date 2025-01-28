@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_27_214909) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_28_220541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -102,6 +102,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_27_214909) do
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_groups_on_name", unique: true
+    t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
+  create_table "pools", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "user_id", null: false
+    t.integer "price", default: 0
+    t.boolean "allow_multiple_entries", default: false
+    t.datetime "locked_at"
+    t.datetime "completed_at"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_pools_on_group_id"
+    t.index ["name", "group_id"], name: "index_pools_on_name_and_group_id", unique: true
+    t.index ["user_id"], name: "index_pools_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "login_code"
@@ -112,4 +137,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_27_214909) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
+  add_foreign_key "groups", "users"
+  add_foreign_key "pools", "groups"
+  add_foreign_key "pools", "users"
 end
