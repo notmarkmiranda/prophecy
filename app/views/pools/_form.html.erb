@@ -1,0 +1,53 @@
+<%= form_with model: @pool, url: form_url, method: form_method do |f| %>
+  <div class="mb-6">
+    <%= f.label :name, "Name", class: "block text-gray-800 text-sm mb-2 uppercase tracking-wide" %>
+    <%= f.text_field :name, class: "shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
+  <div class="mb-6">
+    <%= f.label :price, "Price", class: "block text-gray-800 text-sm mb-2 uppercase tracking-wide" %>
+    <%= f.number_field :price, class: "shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
+  <div class="mb-6">
+    <%= f.check_box :allow_multiple_entries, class: "mr-2 leading-tight" %>
+    <%= f.label :allow_multiple_entries, "Allow multiple entries", class: "text-gray-800 text-sm" %>
+  </div>
+  <div class="mb-6">
+    <%= f.label :locked_at, "Locked At", class: "block text-gray-800 text-sm mb-2 uppercase tracking-wide" %>
+    <%= f.datetime_select :locked_at, { default: @default_locked_at }, { class: "shadow appearance-none border border-gray-600 rounded py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" } %>
+  </div>
+  <div class="mb-6">
+    <%= f.label :group_id, "Add to Group", class: "block text-gray-800 text-sm mb-2 uppercase tracking-wide" %>
+    <%= f.select :group_id,
+      options_for_select(
+        current_user.groups.any? ?
+        [['Select a group', '']] + current_user.groups.map { |group| [group.name, group.id] } + [['---', false], ['New Group', 'new']] :
+        [['Select a group', ''], ['New Group', 'new']],
+        @pool.group_id || ''
+      ),
+      {},
+      { id: 'group-select', class: 'shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6' }
+    %>
+    <div id="new-group-name" style="display: none;">
+      <%= f.label :new_group_name, "New Group Name", class: "block text-gray-800 text-sm mb-2 uppercase tracking-wide" %>
+      <%= f.text_field :new_group_name, class: "shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+  </div>
+  <div class="flex items-center justify-between">
+    <%= f.submit submit_button_text, class: "border border-blue-600 text-blue-600 font-semibold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-blue-100 w-full transition duration-300 ease-in-out" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const selectElement = document.getElementById("group-select");
+    const newGroupNameField = document.getElementById("new-group-name");
+
+    selectElement.addEventListener("change", function() {
+      if (selectElement.value === "new") {
+        newGroupNameField.style.display = "block";
+      } else {
+        newGroupNameField.style.display = "none";
+      }
+    });
+  });
+</script>

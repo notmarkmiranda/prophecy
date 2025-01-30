@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get "pages/index"
   get "up" => "rails/health#show", as: :rails_health_check
 
+  ## login & session management start
   get "/sign-in", to: "user_authentication#show", as: :user_authentication
   post "/sign-in", to: "user_authentication#create"
   get "/login-code", to: "user_authentication#login_code", as: :user_login_code
@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get "/dashboard", to: "dashboard#show", as: :dashboard
 
   delete "/logout", to: "user_authentication#destroy", as: :logout
+  ## login & session management end
+
+  resources :pools, only: [ :new, :create, :show, :edit, :update ]
 
   root "pages#index"
 end

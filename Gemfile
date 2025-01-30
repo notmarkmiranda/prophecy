@@ -19,6 +19,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 gem "mailgun-ruby"
 gem "good_job", "~> 3.0"
+gem "faker"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -26,6 +27,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "rspec-rails", "~> 6.0"
   gem "pry"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -33,7 +35,7 @@ group :development do
 end
 
 group :test do
-  gem "capybara", "~> 3.36"
+  gem "capybara"
   gem "selenium-webdriver" # Optional, for using Selenium with Capybara
   gem "webdrivers" # Optional, for automatically managing WebDriver binaries
   gem "launchy"
