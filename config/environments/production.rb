@@ -62,7 +62,8 @@ Rails.application.configure do
     api_key: Rails.application.credentials.dig(:mailgun, :api_key),
     domain: Rails.application.credentials.dig(:mailgun, :domain)
   }
-  config.action_mailer.default_url_options = { host: "mail.superduper.bet" }
+  config.action_mailer.default_url_options = { host: "prophecy-fknu.onrender.com" }
+  # config.action_mailer.default_url_options = { host: "superduper.bet" }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
