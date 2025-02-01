@@ -30,6 +30,7 @@ class MembershipsController < ApplicationController
     @membership = Membership.verify_token(params[:token])
 
     if @membership
+      session[:user_id] = @membership.user_id
       @membership.update!(status: :active)
       redirect_to dashboard_path, notice: "Membership successfully verified!"
     else
