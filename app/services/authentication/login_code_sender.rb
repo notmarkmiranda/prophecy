@@ -1,14 +1,14 @@
 module Authentication
   class LoginCodeSender
     def self.call(user)
-      new(user).call
+      new(user).call!
     end
 
     def initialize(user)
       @user = user
     end
 
-    def call
+    def call!
       generate_login_code
       send_login_code_email
       create_temporary_session
