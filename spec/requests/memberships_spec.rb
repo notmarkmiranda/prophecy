@@ -97,4 +97,40 @@ RSpec.describe "Memberships", type: :request do
       end
     end
   end
+
+  describe "GET /verify-membership/:token" do
+    let(:membership) { create(:membership, status: :inactive) }
+    let(:token) { membership.generate_token }
+
+    context "with a valid token" do
+      it "activates the membership" do
+        get verify_membership_path(token: token)
+        expect(membership.reload.status).to eq("active")
+      end
+
+      it "redirects to dashboard with success message" do
+        get verify_membership_path(token: token)
+        expect(response).to redirect_to(dashboard_path)
+        expect(flash[:notice]).to eq("Membership successfully verified!")
+      end
+    end
+
+    context "with an invalid token" do
+      it "redirects to root with error message" do
+        get verify_membership_path(token: "invalid_token")
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq("Invalid or expired verification link.")
+      end
+    end
+
+    context "with an expired token" do
+      let(:token) { membership.generate_token(1.minute.ago) }
+
+      it "redirects to root with error message" do
+        get verify_membership_path(token: token)
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq("Invalid or expired verification link.")
+      end
+    end
+  end
 end

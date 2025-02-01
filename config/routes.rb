@@ -18,5 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get "/verify-membership/:token", to: "memberships#verify", as: :verify_membership
+
   root "pages#index"
 end

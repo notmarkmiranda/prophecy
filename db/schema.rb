@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_01_031037) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_01_160842) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -119,6 +119,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_01_031037) do
     t.datetime "updated_at", null: false
     t.string "joinable_type", null: false
     t.bigint "joinable_id", null: false
+    t.integer "status", default: 0, null: false
     t.index ["joinable_type", "joinable_id"], name: "index_memberships_on_joinable"
     t.index ["user_id", "joinable_type", "joinable_id"], name: "index_memberships_on_user_and_joinable", unique: true
     t.index ["user_id"], name: "index_memberships_on_user_id"

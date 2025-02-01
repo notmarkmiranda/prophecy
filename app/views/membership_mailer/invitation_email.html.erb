@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You've been invited!</h1>
+    <p>
+      <%= @inviter.email %> has invited you to join <%= @membership.joinable.name %>.
+    </p>
+    <p>
+      To accept this invitation, please click the link below:
+    </p>
+    <p>
+      <%= link_to 'Accept Invitation', @url %>
+    </p>
+    <p>
+      This invitation link will expire in 24 hours.
+    </p>
+  </body>
+</html>

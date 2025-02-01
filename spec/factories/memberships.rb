@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :membership do
     user
-    association :memberable, factory: :pool
+    association :joinable, factory: :pool
     role { :participant }
   end
 end
