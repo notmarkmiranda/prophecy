@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   delete "/logout", to: "user_authentication#destroy", as: :logout
   ## login & session management end
 
-  resources :pools, only: [ :new, :create, :show, :edit, :update ]
+  resources :pools, only: [ :new, :create, :show, :edit, :update ] do
+    member do
+      resources :memberships, only: [ :new, :create ]
+    end
+  end
 
   root "pages#index"
 end

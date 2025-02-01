@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_28_220541) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_01_031037) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -112,6 +112,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_28_220541) do
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "role", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "joinable_type", null: false
+    t.bigint "joinable_id", null: false
+    t.index ["joinable_type", "joinable_id"], name: "index_memberships_on_joinable"
+    t.index ["user_id", "joinable_type", "joinable_id"], name: "index_memberships_on_user_and_joinable", unique: true
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
   create_table "pools", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "user_id", null: false
@@ -139,6 +151,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_28_220541) do
   end
 
   add_foreign_key "groups", "users"
+  add_foreign_key "memberships", "users"
   add_foreign_key "pools", "groups"
   add_foreign_key "pools", "users"
 end

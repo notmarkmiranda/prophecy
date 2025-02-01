@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :pool do
-    sequence(:name) { |n| "#{Faker::Book.title}#{n}" }
+    sequence(:name) { "#{Faker::Book.title}#{SecureRandom.hex(8)}" }
     user
     price { rand(0..100) }
     allow_multiple_entries { [ true, false ].sample }
