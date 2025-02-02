@@ -39,4 +39,5 @@ group :test do
   gem "selenium-webdriver" # Optional, for using Selenium with Capybara
   gem "webdrivers" # Optional, for automatically managing WebDriver binaries
   gem "launchy"
+  gem "database_cleaner-active_record"
 end
