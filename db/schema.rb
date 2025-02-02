@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_01_160842) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_02_160109) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -125,6 +125,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_01_160842) do
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
+  create_table "options", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.string "text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_options_on_question_id"
+  end
+
   create_table "pools", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "user_id", null: false
@@ -140,6 +148,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_01_160842) do
     t.index ["user_id"], name: "index_pools_on_user_id"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.bigint "pool_id", null: false
+    t.string "text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "correct_option_id"
+    t.index ["pool_id"], name: "index_questions_on_pool_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "login_code"
@@ -153,6 +170,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_01_160842) do
 
   add_foreign_key "groups", "users"
   add_foreign_key "memberships", "users"
+  add_foreign_key "options", "questions"
   add_foreign_key "pools", "groups"
   add_foreign_key "pools", "users"
+  add_foreign_key "questions", "options", column: "correct_option_id", on_delete: :nullify
+  add_foreign_key "questions", "pools"
 end
