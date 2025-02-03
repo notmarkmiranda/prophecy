@@ -10,4 +10,57 @@
   <div class="mt-4">
     <%= link_to 'Invite New Member', new_membership_path(@pool), class: 'bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700' %>
   </div>
+
+  <div class="mt-8 border-t pt-6">
+    <h2 class="text-2xl font-bold mb-6">Questions</h2>
+    <% if @questions.any? %>
+      <div class="space-y-6">
+        <% @questions.each do |question| %>
+          <div class="bg-gray-50 p-6 rounded-lg border border-gray-300">
+            <h3 class="text-xl font-semibold mb-4"><%= question.text %></h3>
+            <div class="ml-4 space-y-2">
+              <% question.options.each do |option| %>
+                <div class="flex items-center py-1">
+                  <span class="text-gray-400 mr-2">•</span>
+                  <p class="text-gray-700"><%= option.text %></p>
+                  <% if option == question.correct_option %>
+                    <span class="ml-2 text-green-600">✅</span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-gray-600 italic">No questions have been added yet.</p>
+    <% end %>
+  </div>
+
+  <% if can_manage_pool?(@pool) && pool_unlocked?(@pool) %>
+    <div class="mt-8 border-t pt-6">
+      <h2 class="text-2xl font-bold mb-6">Add New Question</h2>
+      <div class="sm:w-1/3">
+        <%= form_with(model: [@pool, @new_question], local: true, class: "space-y-6") do |f| %>
+          <div class="mb-6">
+            <%= f.label :text, "Question Text", class: "block text-gray-800 text-sm mb-2 uppercase tracking-wide" %>
+            <%= f.text_field :text, class: "shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+          </div>
+
+          <div class="mb-6">
+            <label class="block text-gray-800 text-sm mb-4 uppercase tracking-wide">Options</label>
+            <%= f.fields_for :options do |option_form| %>
+              <div class="mb-3">
+                <%= option_form.text_field :text,
+                    placeholder: "Option #{option_form.index + 1}",
+                    class: "shadow appearance-none border border-gray-600 rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+              </div>
+            <% end %>
+          </div>
+
+          <%= f.submit "Add Question", class: "border border-blue-600 text-blue-600 font-semibold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-blue-100 w-full transition duration-300 ease-in-out" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

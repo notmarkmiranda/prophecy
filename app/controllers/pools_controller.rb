@@ -2,8 +2,13 @@ class PoolsController < ApplicationController
   before_action :require_login
 
   def show
-    @pool = Pool.includes(:group).find(params[:id])
+    @pool = Pool.includes(:group, questions: :options).find(params[:id])
+    @questions = @pool.questions.persisted
+    # Build a new question with 4 blank options for the form
+    @new_question = @pool.questions.build
+    4.times { @new_question.options.build }
   end
+
   def new
     @pool = current_user.pools.new
     @default_locked_at = 1.month.from_now.change(hour: 12, minute: 0)
