@@ -40,4 +40,5 @@ group :test do
   gem "webdrivers" # Optional, for automatically managing WebDriver binaries
   gem "launchy"
   gem "database_cleaner-active_record"
+  gem "shoulda-matchers"
 end
