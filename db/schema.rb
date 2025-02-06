@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_02_160109) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_06_022608) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "entries", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "pool_id", null: false
+    t.datetime "submitted_at"
+    t.integer "score", default: 0
+    t.boolean "paid", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pool_id"], name: "index_entries_on_pool_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
 
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -168,6 +180,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_02_160109) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "entries", "pools"
+  add_foreign_key "entries", "users"
   add_foreign_key "groups", "users"
   add_foreign_key "memberships", "users"
   add_foreign_key "options", "questions"
