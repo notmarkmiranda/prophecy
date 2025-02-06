@@ -8,6 +8,7 @@ class Pool < ApplicationRecord
   has_many :participant_memberships, -> { where(role: :participant) }, as: :joinable, class_name: "Membership"
   has_many :participants, through: :participant_memberships, source: :user
   has_many :questions, dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   validates :name, presence: true, uniqueness: { scope: :group_id }
   validates :price, numericality: { greater_than_or_equal_to: 0 }

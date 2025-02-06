@@ -37,6 +37,14 @@
     <% end %>
   </div>
 
+  <% if accepting_entries?(@pool, @questions) %>
+    <div class="mt-8 border-t pt-6">
+      <div class="flex justify-center">
+        <%= link_to 'Create Entry', new_pool_entry_path(@pool), class: 'bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 font-semibold transition duration-300 ease-in-out' %>
+      </div>
+    </div>
+  <% end %>
+
   <% if can_manage_pool?(@pool) && pool_unlocked?(@pool) %>
     <div class="mt-8 border-t pt-6">
       <h2 class="text-2xl font-bold mb-6">Add New Question</h2>

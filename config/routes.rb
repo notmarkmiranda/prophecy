@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resources :memberships, only: [ :new, :create ]
     end
     resources :questions, only: [ :create ]
+    resources :entries, only: [ :new, :create ]
   end
 
   get "/verify-membership/:token", to: "memberships#verify", as: :verify_membership

@@ -6,4 +6,8 @@ module PoolsHelper
   def pool_unlocked?(pool)
     pool.locked_at.nil? || pool.locked_at > Time.current
   end
+
+  def accepting_entries?(pool, questions)
+    questions.any? && pool_unlocked?(pool) && pool.completed_at.nil?
+  end
 end
